@@ -21,5 +21,10 @@ class UserManageController extends CommonController {
     public function index() {
         $this->display();
     }
+    
+    public function add()
+    {
+        $this->display();
+    }
 
 }

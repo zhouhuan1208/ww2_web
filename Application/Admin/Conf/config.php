@@ -8,9 +8,5 @@ return array(
         '__JS__' => __ROOT__ . '/Public/' . MODULE_NAME . '/js',
         '__AVATARS__'=>__ROOT__ . '/Public/' . MODULE_NAME . '/avatars'
     ),
-
-    /*可访问IP*/
-    'ADMIN_ALLOW_IP'  =>'127.0.0.1',
     
-    'DEVELOP_MODE' => true,
 );

@@ -1,7 +1,7 @@
 <extend name="Public/base"/>
 <block name="page_content">
     <div class="page-header">
-        <h1>网站设置</h1>
+        <h1>{$meta_title}</h1>
     </div>
     <div class="row">
         <div class="col-xs-12">
@@ -22,24 +22,21 @@
                                 <label class="item-label">{$config.title}</label>
                                 <div class="controls">
                                     <switch name="config.type">
-                                    <case value="0">
-                                        <input type="text" class="text input-small" name="config[{$config.name}]" value="{$config.value}" <notempty  name="config.remark">data-rel="tooltip" data-placement="bottom" data-original-title="{$config.remark}"</notempty>>
-                                    </case>
                                     <case value="1">
                                         <input type="text" class="text input-large" name="config[{$config.name}]" value="{$config.value}" <notempty  name="config.remark">data-rel="tooltip" data-placement="bottom" data-original-title="{$config.remark}"</notempty>>
                                     </case>
                                     <case value="2">
-                                        <textarea name="config[{$config.name}]" class="config_textarea" <notempty  name="config.remark">data-rel="tooltip" data-placement="bottom" data-original-title="{$config.remark}"</notempty>>{$config.value}</textarea>
-                                    </case>
-                                    <case value="3">
-                                        <textarea name="config[{$config.name}]" class="config_textarea" <notempty  name="config.remark">data-rel="tooltip" data-placement="bottom" data-original-title="{$config.remark}"</notempty>>{$config.value}</textarea>
-                                    </case>
-                                    <case value="4">
                                         <select name="config[{$config.name}]" <notempty  name="config.remark">data-rel="tooltip" data-placement="bottom" data-original-title="{$config.remark}"</notempty>>
                                             <volist name=":parse_config_attr($config['extra'])" id="vo">
                                                 <option value="{$key}" <eq name="config.value" value="$key">selected</eq>>{$vo}</option>
                                             </volist>
                                         </select>
+                                    </case>
+                                    <case value="3">
+                                        <textarea name="config[{$config.name}]" class="config_textarea" <notempty  name="config.remark">data-rel="tooltip" data-placement="bottom" data-original-title="{$config.remark}"</notempty>>{$config.value}</textarea>
+                                    </case>
+                                    <case value="4">
+                                        <textarea name="config[{$config.name}]" class="config_textarea" <notempty  name="config.remark">data-rel="tooltip" data-placement="bottom" data-original-title="{$config.remark}"</notempty>>{$config.value}</textarea>
                                     </case>
                                     </switch>
                                 </div>
@@ -62,12 +59,12 @@
 </block>
 
 
-<block name="footer_script">
+<block name="ace_script">
 
     <script src="__JS__/ace/ace.js"></script>
     <script src="__JS__/ace/ace.sidebar.js"></script>
 
-    <script>
+    <script type="text/javascript">
         $(function () {
             $('[data-rel=tooltip]').tooltip({container: 'body'});
         })
