@@ -38,7 +38,7 @@ class CommonController extends Controller {
         // 检查IP地址访问
         if (!empty(C('ADMIN_ALLOW_IP'))) {
             if (!in_array(get_client_ip(), explode(',', C('ADMIN_ALLOW_IP')))) {
-                $this->error('403:禁止访问!', U("Public/login"));
+                $this->error('403:禁止访问,请联系管理员!', U("Public/login"));
             }
         }
         //检查访问权限
