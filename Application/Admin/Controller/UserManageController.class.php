@@ -19,6 +19,7 @@ use Think\Controller;
 class UserManageController extends CommonController {
 
     public function index() {
+        $this->meta_title = '管理员列表';
         $this->display();
     }
     
