@@ -1650,12 +1650,36 @@
 
     <script type = "text/javascript">
         jQuery(function ($) {
-        
+
             //initiate dataTables plugin
             var oTable1 =
                     $('#dynamic-table')
                     //.wrap("<div class='dataTables_borderWrap' />")   //if you are applying horizontal scrolling (sScrollX)  
                     .dataTable({
+                        language: {
+                            "sProcessing": "处理中...",
+                            "sLengthMenu": "显示 _MENU_ 项结果",
+                            "sZeroRecords": "没有匹配结果",
+                            "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+                            "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+                            "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+                            "sInfoPostFix": "",
+                            "sSearch": "搜索:",
+                            "sUrl": "",
+                            "sEmptyTable": "表中数据为空",
+                            "sLoadingRecords": "载入中...",
+                            "sInfoThousands": ",",
+                            "oPaginate": {
+                                "sFirst": "首页",
+                                "sPrevious": "上页",
+                                "sNext": "下页",
+                                "sLast": "末页"
+                            },
+                            "oAria": {
+                                "sSortAscending": ": 以升序排列此列",
+                                "sSortDescending": ": 以降序排列此列"
+                            }
+                        },
                         bAutoWidth: false,
                         "aoColumns": [
                             {"bSortable": false},
@@ -1688,7 +1712,7 @@
 
             //initiate TableTools extension
             var tableTools_obj = new $.fn.dataTable.TableTools(oTable1, {
-                "sSwfPath":"__JS__/dataTables/extensions/TableTools/swf/copy_csv_xls_pdf.swf", //in Ace demo ../assets will be replaced by correct assets path
+                "sSwfPath": "__JS__/dataTables/extensions/TableTools/swf/copy_csv_xls_pdf.swf", //in Ace demo ../assets will be replaced by correct assets path
 
                 "sRowSelector": "td:not(:last-child)",
                 "sRowSelect": "multi",
@@ -1749,7 +1773,6 @@
             });
             //we put a container before our table and append TableTools element to it
             $(tableTools_obj.fnContainer()).appendTo($('.tableTools-container'));
-
             //also add tooltips to table tools buttons
             //addding tooltips directly to "A" buttons results in buttons disappearing (weired! don't know why!)
             //so we add tooltips to the "DIV" child after it becomes inserted
@@ -1763,9 +1786,6 @@
                         $(this).tooltip({container: 'body'});
                 });
             }, 200);
-
-
-
             //ColVis extension
             var colvis = new $.fn.dataTable.ColVis(oTable1, {
                 "buttonText": "<i class='fa fa-search'></i>",
@@ -1774,11 +1794,10 @@
                 //"bRestore": true,
                 "sAlign": "right",
                 "fnLabel": function (i, title, th) {
-                    return $(th).text();//remove icons, etc
+                    return $(th).text(); //remove icons, etc
                 }
 
             });
-
             //style it
             $(colvis.button()).addClass('btn-group').find('button').addClass('btn btn-white btn-info btn-bold')
 
@@ -1786,22 +1805,17 @@
             $(colvis.button())
                     .prependTo('.tableTools-container .btn-group')
                     .attr('title', '显示/隐藏列').tooltip({container: 'body'});
-
             //and make the list, buttons and checkboxed Ace-like
             $(colvis.dom.collection)
                     .addClass('dropdown-menu dropdown-light dropdown-caret dropdown-caret-right')
                     .find('li').wrapInner('<a href="javascript:void(0)" />') //'A' tag is required for better styling
                     .find('input[type=checkbox]').addClass('ace').next().addClass('lbl padding-8');
-
-
-
             /////////////////////////////////
             //table checkboxes
             $('th input[type=checkbox], td input[type=checkbox]').prop('checked', false);
-
             //select/deselect all rows according to table header checkbox
             $('#dynamic-table > thead > tr > th input[type=checkbox]').eq(0).on('click', function () {
-                var th_checked = this.checked;//checkbox inside "TH" table header
+                var th_checked = this.checked; //checkbox inside "TH" table header
 
                 $(this).closest('table').find('tbody > tr').each(function () {
                     var row = this;
@@ -1811,7 +1825,6 @@
                         tableTools_obj.fnDeselect(row);
                 });
             });
-
             //select/deselect a row when the checkbox is checked/unchecked
             $('#dynamic-table').on('click', 'td input[type=checkbox]', function () {
                 var row = $(this).closest('tr').get(0);
@@ -1820,25 +1833,20 @@
                 else
                     tableTools_obj.fnDeselect($(this).closest('tr').get(0));
             });
-
-
             $(document).on('click', '#dynamic-table .dropdown-toggle', function (e) {
                 e.stopImmediatePropagation();
                 e.stopPropagation();
                 e.preventDefault();
             });
-
             /********************************/
             //add tooltip for small view action buttons in dropdown menu
             $('[data-rel="tooltip"]').tooltip({placement: tooltip_placement});
-
             //tooltip placement on right or left
             function tooltip_placement(context, source) {
                 var $source = $(source);
                 var $parent = $source.closest('table')
                 var off1 = $parent.offset();
                 var w1 = $parent.width();
-
                 var off2 = $source.offset();
                 //var w2 = $source.width();
 
