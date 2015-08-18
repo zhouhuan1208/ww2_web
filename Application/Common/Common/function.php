@@ -45,6 +45,7 @@ function data_auth_sign($data) {
  */
 function is_login() {
     $user = session('user_auth');
+ 
     if (empty($user)) {
         return 0;
     } else {

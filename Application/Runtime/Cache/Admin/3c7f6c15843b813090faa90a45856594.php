@@ -25,9 +25,6 @@
 <link rel="stylesheet" href="/ww2_web/Public/Admin/css/ace-ie.css" />
 <![endif]-->
 
-<!-- ace settings handler -->
-<script src="/ww2_web/Public/Admin/js/ace-extra.js"></script>
-
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lte IE 8]>
 <script src="/ww2_web/Public/Admin/js/html5shiv.js"></script>
@@ -130,8 +127,7 @@
     </div>
 
 <!-- /头部 -->
-
-<!-- 左菜单 -->
+<!-- 主体 -->
 
 
     <!-- #section:basics/sidebar -->
@@ -184,14 +180,14 @@
                     </ul>
                 </li><?php endforeach; endif; else: echo "" ;endif; ?>
 
-        </ul><!-- /nav-list -->
+        </ul><!-- /.nav-list -->
 
         <!-- #section:basics/sidebar.layout.minimize -->
         <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
             <i class="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
         </div>
+
         <!-- /section:basics/sidebar.layout.minimize -->
-        
         <script type="text/javascript">
             try {
                 ace.settings.check('sidebar', 'collapsed')
@@ -205,53 +201,6 @@
 
 
 
-<!-- /左菜单 -->
-<!-- 主体 -->
-
-    <div class="main-content">
-        <div class="main-content-inner">
-            <!-- #section:basics/content.breadcrumbs -->
-            <div class="breadcrumbs" id="breadcrumbs">
-                <script type="text/javascript">
-                    try {
-                        ace.settings.check('breadcrumbs', 'fixed')
-                    } catch (e) {
-                    }
-                </script>
-
-                <ul class="breadcrumb">
-                    <li>
-                        <i class="ace-icon fa fa-home home-icon"></i>
-                        <a href="#">Home</a>
-                    </li>
-
-                    <li>
-                        <a href="#">UI &amp; Elements</a>
-                    </li>
-                    <li class="active">Elements</li>
-                </ul><!-- /.breadcrumb -->
-
-                <!-- #section:basics/content.searchbox -->
-                <div class="nav-search" id="nav-search">
-                    <form class="form-search">
-                        <span class="input-icon">
-                            <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off">
-                            <i class="ace-icon fa fa-search nav-search-icon"></i>
-                        </span>
-                    </form>
-                </div><!-- /.nav-search -->
-
-                <!-- /section:basics/content.searchbox -->
-            </div>
-            <!-- /section:basics/content.breadcrumbs -->
-            <div class="page-content">
-
-                
-
-                
-            </div>
-        </div>
-    </div>
 
 
 <!-- /主体 -->
@@ -291,10 +240,6 @@
         <script src="/ww2_web/Public/Admin/js/ace/ace.searchbox-autocomplete.js"></script>
     -->
 
-
-<blcok name="script_text">
-
-</blcok>
 <!-- /底部 -->
 </body>
 </html>

@@ -1,80 +1,46 @@
-<block name="menu">
+<block name="body">
+    <div class="main-content">
+        <div class="main-content-inner">
+            <!-- #section:basics/content.breadcrumbs -->
+            <div class="breadcrumbs" id="breadcrumbs">
+                <script type="text/javascript">
+                    try {
+                        ace.settings.check('breadcrumbs', 'fixed')
+                    } catch (e) {
+                    }
+                </script>
 
-    <!-- #section:basics/sidebar -->
-    <div id="sidebar" class="sidebar                  responsive">
-        <script type="text/javascript">
-            try {
-                ace.settings.check('sidebar', 'fixed')
-            } catch (e) {
-            }
-        </script>
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="ace-icon fa fa-home home-icon"></i>
+                        <a href="#">Home</a>
+                    </li>
 
+                    <li>
+                        <a href="#">UI &amp; Elements</a>
+                    </li>
+                    <li class="active">Elements</li>
+                </ul><!-- /.breadcrumb -->
 
-
-        <ul class="nav nav-list">
-
-            <volist name="__MENU__" id="menu">
-                <li class="{$menu.class|default=''}">
-                    <a href="{$menu.url|U}" class="dropdown-toggle">
-                        <i class="menu-icon {$menu.ico}"></i>
-                        <span class="menu-text">
-                            {$menu.title}
+                <!-- #section:basics/content.searchbox -->
+                <div class="nav-search" id="nav-search">
+                    <form class="form-search">
+                        <span class="input-icon">
+                            <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off">
+                            <i class="ace-icon fa fa-search nav-search-icon"></i>
                         </span>
+                    </form>
+                </div><!-- /.nav-search -->
 
-                        <b class="arrow fa fa-angle-down"></b>
-                    </a>
+                <!-- /section:basics/content.searchbox -->
+            </div>
+            <!-- /section:basics/content.breadcrumbs -->
+            <div class="page-content">
 
-                    <b class="arrow"></b>
+                <block name="page_content">
 
-                    <ul class="submenu">
-
-                        <volist name="menu.group" id="menu_group" >
-                            <li class="{$menu.class|default=''}">
-                                <a href="javascript:void(0);" class="dropdown-toggle">
-                                    <i class="menu-icon fa fa-caret-right"></i>
-                                    {$key}
-                                    <b class="arrow fa fa-angle-down"></b>
-                                </a>
-
-                                <b class="arrow"></b>
-                                <ul class="submenu">
-                                    <volist name="menu_group.child" id="menu_child" >
-                                        <li class="{$menu_child.class|default=''}">
-                                            <a href="{$menu_child.url|U}">
-                                                <i class="menu-icon fa fa-caret-right"></i>
-                                                {$menu_child.title}
-                                            </a>
-
-                                            <b class="arrow"></b>
-                                        </li>
-                                    </volist>
-                                </ul>
-                            </li>
-                        </volist>
-
-                    </ul>
-                </li>  
-            </volist>
-
-        </ul><!-- /.nav-list -->
-
-        <!-- #section:basics/sidebar.layout.minimize -->
-        <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
-            <i class="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+                </block>
+            </div>
         </div>
-
-        <!-- /section:basics/sidebar.layout.minimize -->
-        <script type="text/javascript">
-            try {
-                ace.settings.check('sidebar', 'collapsed')
-            } catch (e) {
-            }
-        </script>
     </div>
-
-
-
-
-
 </block>
-<block name="body"></block>

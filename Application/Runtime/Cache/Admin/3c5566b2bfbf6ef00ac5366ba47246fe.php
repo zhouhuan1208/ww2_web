@@ -46,8 +46,11 @@
 
 
 <!-- /头部 -->
-<!-- 主体 -->
 
+<!-- 左菜单 -->
+
+<!-- /左菜单 -->
+<!-- 主体 -->
 
     <div class="main-container">
         <div class="main-content">
@@ -77,9 +80,11 @@
                                                         <img class="verifyimg reloadverify" alt="点击切换" src="<?php echo U('Public/verify');?>" style="float:right"> </span> </label>
                                                 <div class="space"></div>
                                                 <div class="clearfix">
-                                                    <label class="inline">
-                                                        <input type="checkbox" class="ace" name="remember_me" value="2592000" />
-                                                        <span class="lbl"> 自动登录</span> </label>
+                                                    <!--
+                                                   <label class="inline">
+                                                       <input type="checkbox" class="ace" name="remember_me" value="2592000" />
+                                                       <span class="lbl" > 自动登录</span> </label>
+                                                    -->
                                                     <button type="submit" class="width-35 pull-right btn btn-sm btn-primary "> <i class="ace-icon fa fa-key"></i> <span class="bigger-110">登录</span> </button>
                                                 </div>
                                                 <div class="space-4"></div>
@@ -131,6 +136,10 @@
 </script>
 <script src="/ww2_web/Public/Admin/js/bootstrap.js"></script>
 
+
+<blcok name="script_text">
+
+</blcok>
 <!-- /底部 -->
 </body>
 </html>

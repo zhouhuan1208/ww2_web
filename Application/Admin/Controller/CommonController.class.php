@@ -22,22 +22,31 @@ class CommonController extends Controller {
     public function _initialize() {
         $auth = new Auth();
         define('UID', is_login());
-        if (UID) {
-            // 检查IP地址访问
-            if (!empty(C('ADMIN_ALLOW_IP'))) {
-                if (!in_array(get_client_ip(), explode(',', C('ADMIN_ALLOW_IP')))) {
-                    $this->error('403:禁止访问!');
-                }
-            }
-            //检查访问权限
-            if (!$auth->check(MODULE_NAME . '/' . CONTROLLER_NAME . '/' . ACTION_NAME, session('user_auth.uid'))) {
-                $this->error("您没有权限访问此页面!", U("Index/index"));
-            }
-
-            $this->assign('__MENU__', $this->getMenus());  //访问成功先获取菜单
-        } else {
+        if (!UID) {// 还没登录 跳转到登录页面
             $this->redirect('Public/login');
         }
+
+        /* 读取数据库中的配置 */
+        $config = S('DB_CONFIG_DATA');
+        if (!$config) {
+            $config = $this->lists('Config/lists');
+            S('DB_CONFIG_DATA', $config);
+        }
+        
+        C($config); //添加配置
+        
+        // 检查IP地址访问
+        if (!empty(C('ADMIN_ALLOW_IP'))) {
+            if (!in_array(get_client_ip(), explode(',', C('ADMIN_ALLOW_IP')))) {
+                $this->error('403:禁止访问!', U("Public/login"));
+            }
+        }
+        //检查访问权限
+        if (!$auth->check(MODULE_NAME . '/' . CONTROLLER_NAME . '/' . ACTION_NAME, session('user_auth.uid'))) {
+            $this->error("您没有权限访问此页面!");
+        }
+
+        $this->assign('__MENU__', $this->getMenus());  //访问成功先获取菜单
     }
 
     /**
@@ -94,7 +103,7 @@ class CommonController extends Controller {
                 session('ADMIN_MENU_LIST', $menus);
             }
         }
-
+        //print_r($menus);
         return $menus;
     }
 
@@ -116,12 +125,14 @@ class CommonController extends Controller {
 
                 if ($this->checkRule(MODULE_NAME . '/' . $c_item['url'])) {  // 判断主菜单权限
                     if (!empty($c_item['group'])) {
+                        $group_child[$c_item['group']]['group_name'] = $c_item['group'];
                         $group_child[$c_item['group']]['child'][$c_key]['id'] = $c_item['id'];
                         $group_child[$c_item['group']]['child'][$c_key]['title'] = $c_item['title'];
                         $group_child[$c_item['group']]['child'][$c_key]['url'] = $c_item['url'];
                         $group_child[$c_item['group']]['child'][$c_key]['ico'] = $c_item['ico'];
                         if (strtolower(CONTROLLER_NAME . '/' . ACTION_NAME) == strtolower($c_item['url'])) {
                             $group_child[$c_item['group']]['child'][$c_key]['class'] = 'active';
+                            $group_child[$c_item['group']]['class'] = 'active open';
                             $menus[$key]['class'] = 'active open';
                         }
                     }
@@ -131,5 +142,45 @@ class CommonController extends Controller {
         }
         return $menus;
     }
+    
+    /**
+     * 获取数据库中的配置列表
+     * @return array 配置数组
+     */
+    private function lists(){
+        $map    = array('status' => 1);
+        $data   = M('Config')->where($map)->field('type,name,value')->select();
+        
+        $config = array();
+        if($data && is_array($data)){
+            foreach ($data as $value) {
+                $config[$value['name']] = $this->parse($value['type'], $value['value']);
+            }
+        }
+        return $config;
+    }
+    
+    /**
+     * 根据配置类型解析配置
+     * @param  integer $type  配置类型
+     * @param  string  $value 配置值
+     */
+    private function parse($type, $value){
+        switch ($type) {
+            case 3: //解析数组
+                $array = preg_split('/[,;\r\n]+/', trim($value, ",;\r\n"));
+                if(strpos($value,':')){
+                    $value  = array();
+                    foreach ($array as $val) {
+                        list($k, $v) = explode(':', $val);
+                        $value[$k]   = $v;
+                    }
+                }else{
+                    $value =    $array;
+                }
+                break;
+        }
+        return $value;
+    }	
 
 }

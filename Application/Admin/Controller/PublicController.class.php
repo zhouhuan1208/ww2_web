@@ -40,13 +40,11 @@ class PublicController extends Controller {
             $map['username'] = I('post.username');
             $user = $Admin->where($map)->find();  //实例化模型类通过用户名查询出这条用户数据
 
-
-            $session_time = I('post.remember_me','');
-
+            $session_time = I('post.remember_me', '');
 
             if ($user['status'] == 1) { //判断是否被锁定 status 1为正常 0为锁定
                 if (I('post.password', '', 'md5') == $user['password']) { //判断密码是否正确      
-                    if ($Admin->autoLogin($user,$session_time)) {
+                    if ($Admin->autoLogin($user, $session_time)) {
                         $this->success('登录成功!', U('Index/index'));
                     } else {
                         $this->error('登录发生未知错误,请重新登录!', U('Index/index'));

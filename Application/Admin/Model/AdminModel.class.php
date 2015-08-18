@@ -42,21 +42,16 @@ class AdminModel extends Model {
             'last_login_time' => $user['last_login_time'],
         );
 
-        if (!empty($session_tiem)) {
-            
-        }
-
-        if (!empty($session_time)) {
-            
-       //     echo $session_time;
-            session(array('name' => 'user_auth', 'expire' => $session_time));
-            session(array('name' => 'user_auth_sign', 'expire' => $session_time));
-        }
+        /*
+          if (!empty($session_time)) {
+          session(array('name' => 'user_auth', 'expire' => $session_time), $auth);
+          session(array('name' => 'user_auth_sign', 'expire' => $session_time), data_auth_sign($auth));
+          return true;
+          }
+         */
 
         session('user_auth', $auth);
         session('user_auth_sign', data_auth_sign($auth));
-
-
         return true;
     }
 
